@@ -24,7 +24,7 @@ const HomeScreen = () => {
             <Button title="Login" color="white" onPress={()=> navigation.navigate("Login")} className=" " />
           </View>
           <View className="">
-            <Button title="Register" color="#A855F7" className="" />
+            <Button title="Register" color="#A855F7" onPress={()=> navigation.navigate("Register")} className="" />
           </View>
         </View>
       </View>
