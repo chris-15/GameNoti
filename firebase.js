@@ -6,11 +6,11 @@ import { API_KEY } from "@env"
 
 const firebaseConfig = {
   apiKey: API_KEY,
-  authDomain: "game-noti-app.firebaseapp.com",
-  projectId: "game-noti-app",
-  storageBucket: "game-noti-app.appspot.com",
-  messagingSenderId: "678749832947",
-  appId: "1:678749832947:web:1ebf073fe57f46cada1986"
+  authDomain: "gamenoti-app-41175.firebaseapp.com",
+  projectId: "gamenoti-app-41175",
+  storageBucket: "gamenoti-app-41175.appspot.com",
+  messagingSenderId: "758961027442",
+  appId: "1:758961027442:web:860d4bf1c37eed1ad8c5eb"
 };
 
 const app = initializeApp(firebaseConfig)
