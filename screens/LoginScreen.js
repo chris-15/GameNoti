@@ -1,12 +1,32 @@
 import { StatusBar } from "expo-status-bar";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Text, View, SafeAreaView, KeyboardAvoidingView } from "react-native";
 import { Icon } from "@rneui/themed";
 import { Button, Input } from "@rneui/base";
 
+import { auth, authInstance } from "../firebase";
+
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerBackTitle: "Home"
+    })
+  }, [navigation])
+
+  useEffect(() =>{
+    const unsubscribe = authInstance.onAuthStateChanged((authUser) => {
+      console.log(authUser)
+      if(authUser) {
+        navigation.replace("Main")
+      }
+    });
+    return unsubscribe;
+  },[])
+
+  const logIn= () =>{}
   return (
     <KeyboardAvoidingView
       behavior="padding"
@@ -37,6 +57,7 @@ const LoginScreen = ({ navigation }) => {
       <View className="w-1/2">
         <Button
           title="Login"
+          onPress={logIn}
           buttonStyle={{
             backgroundColor: "#A855F7",
             borderRadius: 30,
