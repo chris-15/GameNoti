@@ -1,8 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, initializeAuth, getReactNativePersistence } from "firebase/auth";
+import {
+  getAuth,
+  initializeAuth,
+  getReactNativePersistence,
+} from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { API_KEY } from "@env"
+import { API_KEY } from "@env";
 
 const firebaseConfig = {
   apiKey: API_KEY,
@@ -10,10 +14,10 @@ const firebaseConfig = {
   projectId: "gamenoti-app-41175",
   storageBucket: "gamenoti-app-41175.appspot.com",
   messagingSenderId: "758961027442",
-  appId: "1:758961027442:web:860d4bf1c37eed1ad8c5eb"
+  appId: "1:758961027442:web:860d4bf1c37eed1ad8c5eb",
 };
 
-const app = initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
@@ -23,4 +27,4 @@ const auth = initializeAuth(app, {
 
 const authInstance = getAuth(app);
 
-export { db, auth, authInstance};
+export { db, auth, authInstance };
