@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
 import {
   getAuth,
   initializeAuth,
@@ -10,11 +10,11 @@ import { API_KEY } from "@env";
 
 const firebaseConfig = {
   apiKey: API_KEY,
-  authDomain: "gamenoti-app-41175.firebaseapp.com",
-  projectId: "gamenoti-app-41175",
-  storageBucket: "gamenoti-app-41175.appspot.com",
-  messagingSenderId: "758961027442",
-  appId: "1:758961027442:web:860d4bf1c37eed1ad8c5eb",
+  authDomain: "game-noti-app-adda1.firebaseapp.com",
+  projectId: "game-noti-app-adda1",
+  storageBucket: "game-noti-app-adda1.appspot.com",
+  messagingSenderId: "478896764814",
+  appId: "1:478896764814:web:04c1a5f46ac30b552456df",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -27,4 +27,17 @@ const auth = initializeAuth(app, {
 
 const authInstance = getAuth(app);
 
-export { db, auth, authInstance };
+const addUser = async (userUID, displayName, email) => {
+  try {
+    const usersCollection = collection(db, "users");
+
+    await setDoc(doc(usersCollection, userUID), {
+      displayName: displayName,
+      email: email,
+    });
+  } catch (error) {
+    console.error("Error adding user to Firestore:", error);
+  }
+};
+
+export { db, auth, authInstance, addUser };

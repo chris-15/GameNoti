@@ -1,7 +1,7 @@
 import { Text, View, KeyboardAvoidingView } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { Button, Input } from "@rneui/base";
-import { auth, authInstance } from "../firebase";
+import { auth, authInstance, addUser } from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const RegisterScreen = ( { navigation }) => {
@@ -15,7 +15,7 @@ const RegisterScreen = ( { navigation }) => {
     })
   }, [navigation])
 
-  const register = () => {
+  /* const register = () => {
     createUserWithEmailAndPassword(authInstance, email, password)
       .then((userCredential) => {
         updateProfile(userCredential.user, {
@@ -23,7 +23,21 @@ const RegisterScreen = ( { navigation }) => {
         })
       })
       .catch((error) => alert(error.message));
-  };
+  }; */
+  const register = async() =>{
+    try {
+      const userCredential = await createUserWithEmailAndPassword(authInstance, email, password);
+
+      await updateProfile(userCredential.user, {
+        displayName: username,
+      });
+
+      const userUID = userCredential.user.uid;
+      addUser(userUID, username, email);
+    } catch (error) {
+      alert(error.message);
+    }
+  }
 
   return (
     <KeyboardAvoidingView behavior="padding" className="flex-1 justify-center items-center p-10 bg-neutral-800 space-y-8">
