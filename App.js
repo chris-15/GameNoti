@@ -10,7 +10,8 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   const globalScreenOptions = {
     headerStyle: { backgroundColor: "#262626" },
-    headerTintColor: {color: "white"},
+    headerTintColor: "white",
+   
   };
   return (
     <NavigationContainer>
