@@ -1,7 +1,8 @@
-import { View, Text, SafeAreaView, Button } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import { Button } from "@rneui/base";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -12,20 +13,35 @@ const HomeScreen = () => {
   }, []);
   return (
     <SafeAreaView className=" flex-1 bg-neutral-800">
-        <StatusBar style="light"/>
+      <StatusBar style="light" />
 
-      <View className="flex-1 justify-center items-center space-y-2">
+      <View className="flex-1 justify-center items-center space-y-8">
+        {/* Title */}
         <View className="">
-          <Text className="text-white text-2xl font-bold">Welcome to GameNoti!</Text>
+          <Text className="text-white text-3xl font-bold">
+            Welcome to GameNoti!
+          </Text>
         </View>
 
+        {/* Buttons  */}
         <View className="">
-          <View className="bg-purple-500 rounded-lg">
-            <Button title="Login" color="white" onPress={()=> navigation.navigate("Login")} className=" " />
-          </View>
-          <View className="">
-            <Button title="Register" color="#A855F7" onPress={()=> navigation.navigate("Register")} className="" />
-          </View>
+          <Button
+            title="Login"
+            titleStyle={{ fontSize: 24 }}
+            buttonStyle={{
+              backgroundColor: "#A855F7",
+              borderRadius: 30,
+            }}
+            onPress={() => navigation.navigate("Login")}
+            className=" "
+          />
+
+          <Button
+            title="Register"
+            type="clear"
+            titleStyle={{ color: "#A855F7", textDecorationLine: "underline", fontSize: 24 }}
+            onPress={() => navigation.navigate("Register")}
+          />
         </View>
       </View>
     </SafeAreaView>
