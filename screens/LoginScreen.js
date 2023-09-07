@@ -5,35 +5,39 @@ import { Icon } from "@rneui/themed";
 import { Button, Input } from "@rneui/base";
 
 import { auth, authInstance } from "../firebase";
+import { useNavigation } from "@react-navigation/native";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({  }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+const navigation = useNavigation();
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerBackTitle: "Home"
-    })
-  }, [navigation])
+      headerShown: false,
+    });
+  }, []);
 
-  useEffect(() =>{
+  useEffect(() => {
     const unsubscribe = authInstance.onAuthStateChanged((authUser) => {
-      console.log(authUser)
-      if(authUser) {
-        navigation.replace("Main")
+      console.log(authUser);
+      if (authUser) {
+        navigation.replace("Main");
       }
     });
     return unsubscribe;
-  },[])
+  }, []);
 
-  const logIn= () =>{}
+  const logIn = () => {};
   return (
     <KeyboardAvoidingView
       behavior="padding"
       className="flex-1 bg-neutral-800 justify-center items-center p-10"
     >
-      {/* <Text className="text-white">Welcome to the Login Page!</Text>
-       */}
+      <StatusBar style="light" />
+      <Text className="text-white text-3xl font-bold text-center">
+            Welcome to GameNoti!
+          </Text>
       <Icon name="sports-esports" color="white" size={100} />
       <View className=" w-full">
         <Input
@@ -57,11 +61,23 @@ const LoginScreen = ({ navigation }) => {
       <View className="w-1/2">
         <Button
           title="Login"
+          
           onPress={logIn}
           buttonStyle={{
             backgroundColor: "#A855F7",
             borderRadius: 30,
           }}
+        />
+
+        <Button
+          title="Register"
+          type="clear"
+          titleStyle={{
+            color: "#A855F7",
+            textDecorationLine: "underline",
+            
+          }}
+          onPress={() => navigation.navigate("Register")}
         />
       </View>
 
