@@ -2,15 +2,14 @@ import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Icon } from "@rneui/themed";
-import { authInstance } from "../firebase"
+import { authInstance } from "../firebase";
 
 const MainScreen = ({ navigation }) => {
-
-  const signOutUser = () =>{
+  const signOutUser = () => {
     authInstance.signOut().then(() => {
       navigation.replace("Login");
     });
-  }
+  };
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "GameNoti",
@@ -23,7 +22,9 @@ const MainScreen = ({ navigation }) => {
       ),
       headerRight: () => (
         <View style={{ marginRight: 20 }}>
-          <Icon name="search" color="white" />
+          <TouchableOpacity onPress={() => navigation.navigate("Add Friend")}>
+            <Icon name="search" color="white" />
+          </TouchableOpacity>
         </View>
       ),
     });
