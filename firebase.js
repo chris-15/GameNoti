@@ -27,6 +27,7 @@ const auth = initializeAuth(app, {
 
 const authInstance = getAuth(app);
 
+//adds user to the firestore
 const addUser = async (userUID, displayName, email) => {
   try {
     const usersCollection = collection(db, "users");
@@ -34,6 +35,7 @@ const addUser = async (userUID, displayName, email) => {
     await setDoc(doc(usersCollection, userUID), {
       displayName: displayName,
       email: email,
+      friends: [],
     });
   } catch (error) {
     console.error("Error adding user to Firestore:", error);
