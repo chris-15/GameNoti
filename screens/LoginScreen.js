@@ -6,12 +6,13 @@ import { Button, Input } from "@rneui/base";
 
 import { auth, authInstance } from "../firebase";
 import { useNavigation } from "@react-navigation/native";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-const LoginScreen = ({  }) => {
+const LoginScreen = ({}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-const navigation = useNavigation();
+  const navigation = useNavigation();
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -28,7 +29,11 @@ const navigation = useNavigation();
     return unsubscribe;
   }, []);
 
-  const logIn = () => {};
+  const logIn = () => {
+    signInWithEmailAndPassword(authInstance, email, password).catch((error) =>
+      alert(error)
+    );
+  };
   return (
     <KeyboardAvoidingView
       behavior="padding"
@@ -36,8 +41,8 @@ const navigation = useNavigation();
     >
       <StatusBar style="light" />
       <Text className="text-white text-3xl font-bold text-center">
-            Welcome to GameNoti!
-          </Text>
+        Welcome to GameNoti!
+      </Text>
       <Icon name="sports-esports" color="white" size={100} />
       <View className=" w-full">
         <Input
@@ -61,7 +66,6 @@ const navigation = useNavigation();
       <View className="w-1/2">
         <Button
           title="Login"
-          
           onPress={logIn}
           buttonStyle={{
             backgroundColor: "#A855F7",
@@ -75,7 +79,6 @@ const navigation = useNavigation();
           titleStyle={{
             color: "#A855F7",
             textDecorationLine: "underline",
-            
           }}
           onPress={() => navigation.navigate("Register")}
         />
