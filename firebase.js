@@ -1,5 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getFirestore,
+  setDoc,
+  updateDoc,
+  arrayUnion
+} from "firebase/firestore";
 import {
   getAuth,
   initializeAuth,
@@ -42,4 +49,18 @@ const addUser = async (userUID, displayName, email) => {
   }
 };
 
-export { db, auth, authInstance, addUser };
+//adds friend to user collection
+const addFriend = async (userUID, friendUID) => {
+  try {
+    const usersCollection = collection(db, "users");
+    const userDoc = doc(usersCollection, userUID);
+
+    await updateDoc(userDoc, {
+      friends: arrayUnion(friendUID),
+    });
+  } catch (error) {
+    console.error("Error adding friend to Firestore:", error);
+  }
+};
+
+export { db, auth, authInstance, addUser, addFriend };
